@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('level_akses', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('akses_id')->nullable()->index('fk_level_akses_to_akses');
-            $table->foreignId('level_id')->nullable()->index('fk_level_akses_to_level');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('pengurus', function (Blueprint $table) {
+            $table->foreign('jabatan_id', 'fk_pengurus_to_jabatan')->references('id')->on('jabatan')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('level_akses');
+        Schema::table('pengurus', function (Blueprint $table) {
+            $table->dropForeign('fk_pengurus_to_jabatan');
+        });
     }
 };

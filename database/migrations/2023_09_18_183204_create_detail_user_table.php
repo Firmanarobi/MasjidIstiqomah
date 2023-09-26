@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('detail_user', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('tipe_user_id');
+            $table->foreignId('user_id')->nullable()->index('fk_detail_user_to_users');
+            $table->foreignId('tipe_user_id')->nullable()->index('fk_detail_user_to_tipe_user');
             $table->string('kontak')->nullable();
             $table->text('alamat')->nullable();
-            $table->text('foto')->nullable();
+            $table->longText('foto')->nullable();
             $table->enum('jenis_kelamin', [1,2])->nullable();
             $table->timestamps();
             $table->softDeletes();
