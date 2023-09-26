@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('level_user', function (Blueprint $table) {
             $table->id();
-            $table->integer('level_id');
-            $table->integer('user_id');
+            $table->foreignId('level_id')->nullable()->index('fk_level_user_to_level');
+            $table->foreignId('user_id')->nullable()->index('fk_level_user_to_users');
             $table->timestamps();
             $table->softDeletes();
         });

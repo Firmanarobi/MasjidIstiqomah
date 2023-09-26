@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pengurus', function (Blueprint $table) {
             $table->id();
-            $table->integer('jabatan_id');
+            $table->foreignId('jabatan_id')->nullable()->index('fk_pengurus_to_jabatan');
             $table->string('nama');
             $table->string('email');
             $table->string('kontak');
