@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('agenda', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('author');
-            $table->longText('gambar');
-            $table->string('deskripsi');
-            $table->date('tanggal');
-            $table->string('lokasi');
+            $table->string('nama');
+            $table->string('email');
+            $table->string('subjeck');
+            $table->longText('pesan');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agenda');
+        Schema::dropIfExists('feedback');
     }
 };
