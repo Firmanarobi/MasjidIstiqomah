@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -13,10 +14,18 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens;
-    use HasFactory;
+    // use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
+
+    //field untuk mengetikan tanggal dengan format ymd hms
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -58,4 +67,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    //one to many
+    public function detail_user()
+    {
+        //2 parameter yg berisi (path model, field fk)
+        return $this->hasMany('App\Model\ManagementAccess\DetailUser', 'user_id');
+    }
+    //one to many
+    public function level_user()
+    {
+        //2 parameter yg berisi (path model, field fk)
+        return $this->hasMany('App\Model\ManagementAccess\LevelUser', 'user_id');
+    }
 }

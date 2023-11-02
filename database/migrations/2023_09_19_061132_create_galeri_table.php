@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('galeri', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
+            $table->longText('gambar');
             $table->string('deskripsi');
             $table->date('tanggal');
             $table->string('lokasi');
+            $table->longText('isi');
             $table->timestamps();
             $table->softDeletes();
         });

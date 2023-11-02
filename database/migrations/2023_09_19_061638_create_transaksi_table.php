@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_transaksi');
-            $table->enum('status', [1,2]);
+            $table->string('nama_transaksi');
+            $table->enum('jenis_transaksi', ['masuk','keluar']);
             $table->string('jumlah');
-            $table->string('total');
             $table->timestamps();
             $table->softDeletes();
         });
